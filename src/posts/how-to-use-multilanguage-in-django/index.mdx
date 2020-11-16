@@ -1,0 +1,160 @@
+---
+slug: how-to-use-multilanguage-in-django
+title: Multilanguage in Django
+subtitle: How to use multilanguage in django?
+date: "2020-03-28"
+tags: ["django"]
+keywords: ["backend","multilanguage","language","translation"]
+---
+
+
+![Django Multilanguage](./images/banner.png)
+
+# How to use multiple languages in your Project
+
+Suppose you are creating a site for one of your client, and suddenly he says i need the site to support Russian + German + English. Now you need to do that cause he wants.
+
+so let's start XD
+
+At starting the django doc for language translation looks a bit hard.
+But after this article it will look like a piece of cake.
+
+
+There are two things which comes in handy for language translation
+
+1)  ugettext
+2)  ugettext_lazy
+
+
+set languages
+```python
+	LANGUAGES = (
+    ('en-us', _('English')),
+    ('lt', _('Lithunian')),
+    ('ru', _('Russian')),
+)
+```
+
+
+select a default language
+```python
+	LANGUAGE_CODE = 'en-us'
+```
+
+
+set LOCAL_PATH in order to save 
+```python
+	LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+```
+
+
+set this to true
+```python
+	USE_I18N = True
+
+	USE_L10N = True
+
+```
+
+add locale middleware after session and before common
+```python
+	MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ]
+```
+
+
+Now in first load {% load i18n %} in every template
+after that use {% trans 'string' %} : string will get replaced by default language
+```html
+	<p>{% trans 'Hello World' %}</p>
+```
+
+
+Once it is done
+enter command to makemessages
+```bash
+	python manage.py makemessages -l ru  #lt for russian language 
+```
+
+It will create a .po file inside Locale directory
+it contain the msg id and msgstring 
+```python
+	msgid "company"
+	msgstr "Įmonė" #company in russian
+```
+
+
+now once you filled manually all the msgstr
+```bash
+	python manage.py compilemessages
+```
+
+It will create a .mo file using which django will trnaslate the strings
+
+Now try to load your site.
+It will choose the language according to your browser settings
+
+# How to not do entry from file what if client want do fill word alternative on his own
+
+For this use: [django-rosetta](https://django.com/)
+
+It will create forms in admin panel to write alternate of words
+
+```bash
+	pip install django-rosetta
+```
+
+add it to installed apps
+
+```python
+	'rosetta',
+```
+
+
+change the urls.py
+```python
+	path('rosetta/',include('rosetta.urls')),
+```
+
+
+now try accessing the localhost/rosetta/ it will lead to the admin page to change words
+
+
+
+#How to  add language change form in frontend
+
+use [i18n_patterns](https://docs.djangoproject.com/en/2.2/topics/i18n/translation/#the-set-language-redirect-view)
+
+urls.py
+```python
+path('i18n/', include('django.conf.urls.i18n')),
+```
+
+This url needs post request with language parameter
+
+Post form:
+```html
+	<form action="{% url 'set_language' %}" method="post">
+	{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
+```
+
+
+Now you are good to go
