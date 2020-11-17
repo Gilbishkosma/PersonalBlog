@@ -45,9 +45,7 @@ export default ({data : {file: image}}) => {
                     <ProfileDetail>
                      <h1 style={{marginTop:"0px"}}>Hii, i am Gilbish Kosma</h1>
                      <p>I am a <b style={{color:'green'}}>backend developer</b>, currently learning <b style={{color:'purple'}}>Gatsby</b> and trying to improve my <b style={{color:'orange'}}>social</b> skills.
-                     Email me at <a href="mailto:gilbish@gil20.me" style={{color:"#0c9abb"}}>gilbeeshkosma15@gmail.com</a></p>
-                     <p>I developed this starter to learn gatsby.</p>
-
+                     Email me at <a href="mailto:gilbeeshkosma15@gmail.com" style={{color:"#0c9abb"}}>gilbeeshkosma15@gmail.com</a></p>
                      <ProfileLinks />
                     </ProfileDetail>
                     </Section>

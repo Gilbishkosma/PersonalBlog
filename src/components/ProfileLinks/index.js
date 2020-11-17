@@ -25,7 +25,7 @@ const ProfileLinks = () => (
                         </LinkItem>
                         <LinkItem>
                         <img src="https://img.icons8.com/color/48/000000/web.png" alt=""/>
-                        <Url href="https://gil20.me">Personal Site</Url>
+                        <Url href="https://gilbish.dev">Personal Site</Url>
                         </LinkItem>
                         <LinkItem>
                         <img src="https://img.icons8.com/color/48/000000/stackoverflow.png" alt=""/>
