@@ -44,8 +44,10 @@ const SearchPage = ({data}) => {
     const onSearch = (event) => {
 		const searchedValue =  event.target.value
 		setQuery(searchedValue)
+		console.log(searchedValue)
 		const resultsData = searchedValue ? index.search(searchedValue,{expand: true}).map(({ref}) => index.documentStore.getDoc(ref)) : data.post.nodes
-    	setResults(resultsData)
+		console.log(resultsData)
+		setResults(resultsData)
     }
 
 
@@ -102,7 +104,8 @@ export const query = graphql`
           subtitle,
           slug,
           date,
-          tags
+		  tags,
+		  keywords
         }
         timeToRead
       }

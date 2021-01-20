@@ -42,7 +42,7 @@ const TagContainer = styled.div`
 
 const PostListCard = ({title,slug,subtitle,date,tags}) => {
 	return (
-			<Link to={slug} style={{textDecoration:'none',color: 'inherit'}}>
+			<Link to={`/${slug}`} style={{textDecoration:'none',color: 'inherit'}}>
 			<Container>
 			<Heading>
 				<Title>{title}</Title>

@@ -79,7 +79,7 @@ const LeftMenu = ({coverAll}) => {
 				</TagList>
 			</TagsContainer>
 			<small style={{order:2}}>
-			2020 Gilbish Kosma
+			2021 Gilbish Kosma
 			</small>
 		</Container>	
 		)

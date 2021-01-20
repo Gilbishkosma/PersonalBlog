@@ -3,6 +3,11 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 
+
+// For Snippet highlight
+import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
+deckDeckGoHighlightElement();
+
 const Container = styled.div`
   background: white;
   border-bottom: 1px solid hsla(0, 0%, 0%, 0.07);
@@ -12,7 +17,7 @@ const Container = styled.div`
 const Nav = styled.div`
   max-width: 1260px;
   width: 100%;
-  padding: 20px 10px;
+  padding: 5px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +34,8 @@ const Heading = styled.h3`
 const LinkItem = styled.p`
   color: hsla(0,0%,0%,0.8);
   margin: 0px;
-  padding: 10px;
+  padding: 5px 10px;
+  font-size: smaller;
   border-radius: 5px;
   &:hover {
     background-color: hsla(0, 0%, 0%, 0.07);

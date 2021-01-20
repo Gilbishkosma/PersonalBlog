@@ -1,0 +1,78 @@
+---
+slug: custom-context-processors-in-django
+title: Custom Context Processor in Django.
+subtitle: what's context processor and how to use it?
+date: "2021-08-30"
+tags: ["django"]
+keywords: ["context","processor","template"]
+---
+
+## What's the need of context processors? :innocent:
+Sometimes you want to make a **variable** accessible to all **templates** in a project. 
+   
+Two ways to access a variable in all templates:   
+**1. Hard Way:** By providing the same variable in the context of each view. :neutral_face:     
+**2. Easy Way:** creating a custom context processor :yum:
+
+Personally I don't like the hard way, cause then I have to write the same code in each view.
+
+## Let's see how it can be done the easy way.
+
+Consider a situation where you need to display a **banner image** in each page of your website, the banner image will be fetched from the **database**.
+
+**Model** for the banner image:
+```python
+#models.py
+class BannerImage(models.Model):
+    image = models.ImageField(upload_to='img')
+```
+
+We can access the banner image in each page using the context processor.
+
+## Write Custom Context Processor :raised_hands:
+
+Create a new file **context_processors.py** inside your app and write a function which will return a **dictionary** containing the variable we want to use.
+
+```python
+#context_processors.py
+
+from .models import BannerImage
+
+def access_banner_image(request):
+    """
+      The context processor must return a dictionary.
+    """
+    bannerImage = BannerImage.objects.latest('-id') #query the latest banner image
+    return {'bannerImage':bannerImage} 
+
+```
+
+**access_banner_image** is the custom context processors we just created, add it to the **context_processors** option in the **TEMPLATES** setting so that the variable **bannerImage** is accessible in all templates.
+
+```python
+#settings.py
+TEMPLATES = [
+    {
+        #under OPTIONS key
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+               #context processor written by us.
+           'appname.context_processors.access_banner_image'
+],
+        },
+    },
+]
+```
+
+We are done :tada: , the **bannerImage** variable will be now accessible in all the templates.
+### Example:
+```html
+<img src="{{bannerImage.image.url}}" alt=''/>
+```
+
+
+Thanks For Reading my post.:slightly_smiling_face:

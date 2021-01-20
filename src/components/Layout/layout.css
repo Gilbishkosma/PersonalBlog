@@ -1,8 +1,10 @@
 h1,h2,h3,h4,h5,h6{
     color: #004040;
+    margin-bottom: 2px;
 }
 
 
-pre[class*="language-"] {
-    margin-bottom: 1.45rem;
+
+deckgo-highlight-code {
+    margin-bottom: 2rem;
 }
