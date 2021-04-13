@@ -5,6 +5,11 @@ const TagsData = [
 			fontColor:'white'
 		},
 		{
+			tag:'javascript',
+			bgColor:'yellow',
+			fontColor:'black'
+		},
+		{
 			tag:'django',
 			bgColor:'green',
 			fontColor:'white'

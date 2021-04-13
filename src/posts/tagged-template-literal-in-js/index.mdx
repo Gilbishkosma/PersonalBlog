@@ -1,0 +1,107 @@
+---
+slug: tagged-template-literal-in-js
+title: Tagged templates literal in js.
+subtitle: What is template literal?
+date: "2021-04-13"
+tags: ["javascript"]
+keywords: ["javascript","template","js","backtick"]
+---
+
+## What is template literal? :no_mouth:
+
+Template literals allow us to concatenate or embed variables inside a string. It was introduced in ES6.
+
+Template literals are enclosed by the backtick.
+
+Example:
+```javascript
+const age = 12;
+const title =`My age is ${age} years.`
+```
+
+## What is Tagged templates literal? :grimacing:
+
+Here **tag** refers to a **function** which performs parsing of the given template literal.
+
+[styled components](https://styled-components.com/) is a famous library that uses the tagged template literal.
+
+Example:
+```javascript
+const Title = styled.h1`
+    font-size: 1.5em;
+    text-align: center;
+    color: palevioletred;
+`;
+```
+
+## How it works? :hushed:
+
+### Step 1) Create a function.
+```javascript
+const appendStyle = (array,val1,val2) => {
+   //do something and return a value.
+   return "testing";
+}
+```
+
+can be also written as
+
+```javascript
+const appendStyle = (array,...values) => {
+   //do something and return a value.
+   return "testing";
+}
+```
+
+In the **array** we will get the **split strings**.
+means if the template literal is `My name is ${name} and my age is ${age}`
+
+then, the **array** will be
+
+`array = ['My name is','and my age is']`
+
+and in the **values** we will get all the arguments.
+
+### Step2) attach the function in front of the template literal, without the () 
+ 
+```javascript
+const name = 'gilbish';
+const age = '23';
+const text = appendStyle`My name is ${name} and my age is ${age}`;
+console.log(text);
+
+// output: testing
+```
+
+### Step3) finish the Function.
+
+In the appendStyle function , we gonna make the color of each arguments to blue or whatever color you prefer. :smile:
+
+```javascript
+const appendStyle = (array,...values) => {
+    let color = "blue"
+    let text = '';
+    array.map((item,index) => text += `${item} <span style="color:${color}">${values[index] || ''}</span> `);
+    return text;
+}
+```
+
+our tagged template literal **appendStyle** is ready to use  :confetti_ball:
+
+
+Example:
+```javascript
+const name = 'gilbish';
+const age = '23';
+const text = appendStyle`My name is ${name} and my age is ${age}`;
+
+document.body.innerHTML = text;
+```
+
+Output:
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u8da7fauatbwls526dfv.png)
+
+
+Thanks for reading the post :pray:
+  

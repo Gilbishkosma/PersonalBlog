@@ -23,7 +23,7 @@ I have created a blog starter using gatsby for personal use :tada: ,feel free to
     gatsby new projectName https://github.com/Gilbishkosma/gatsbyblogstarter
     ```
 
-1.  **Start developing.**
+2.  **Start developing.**
 
     Navigate into your new site’s directory and start it up.
 
@@ -32,11 +32,16 @@ I have created a blog starter using gatsby for personal use :tada: ,feel free to
     gatsby develop
     ```
 
-1.  **Open the source code and start editing!**
+3.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+
+4. **How to deploy to your github**
+   First, setup your repo to use github pagews.
+   then run this command
+   `npm run deploy`
 
 ## Frontmatter's Detail
 
